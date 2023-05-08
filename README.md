@@ -1,29 +1,39 @@
 
-# Python Developer AI  Task
+# Telco Customer Churn
 
-Build a binary classification model to predict whether a customer will churn (i.e., discontinue their subscription) or not based on various features in the dataset. You are given a dataset containing customer information and whether they churned or not in the past. Your task is to use this dataset to train a machine learning model and evaluate its performance on a test set.
+---
 
-Dataset: You can use the Telco Customer Churn dataset, which is available on Kaggle at https://www.kaggle.com/blastchar/telco-customer-churn.
 
-## Practices and patterns (Must):
+```
+Please note that the order of codes, files and folders in this project has changed over time. Here are the steps I followed:
+*   Searching,
+*   Coding,
+*   Analyzing the results and refining the approach,
+Through repeated iterations, I have learned valuable lessons and adjusted the project structure accordingly. Despite the changes, I believe that my report will be well-suited to the current structure. Additionally, this is the first time I have written tests for my code.
+```
 
-- [TDD](https://en.wikipedia.org/wiki/Test-driven_development)
-- [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
-- [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
-- Clean git commits that shows your work progress.
 
-## Deliverables:
 
-1. Python script that reads in the dataset, preprocesses it, trains a model, and evaluates its performance on a test set.
-2. A report explaining your approach, including details on data preprocessing, feature selection/engineering, choice of algorithm, hyperparameter tuning, and evaluation metrics.
-3. A visual representation of your model's performance (e.g., ROC curve, confusion matrix).
-4. Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com, make sure you do not erase my commits and then create a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) (code review).
 
-## Requirements:
 
-Use Python 3.x.
-1. Use scikit-learn for the machine learning tasks.
-2. Your code should be well-documented and follow best practices for software engineering.
-3. Your report should be clear and concise, with appropriate visualizations to support your claims.
-4. Your model should achieve an accuracy of at least 75% on the test set.
 
+---
+
+##  **Classification problem**
+
+
+The task involved binary classification with the target variable Churn. I began by analyzing the data, and then performed some data cleaning.
+
+Initially, I noticed that the dataset was unbalanced, with a larger number of rows labeled as 'No' for Churn compared to 'Yes'. As a result, I experimented with various ensemble methods later on.
+
+One of the steps in the data cleaning process involves checking the correctness of data types and filling in null values in the dataset. Additionally, since we have a large subset of categorical features, I converted them into numerical features using one-hot-encoding.
+
+In the Exploratory Data Analysis (EDA) step, I visualized the data from various perspectives, such as histograms, scatterplots, and box plots, to gain insights into the data distribution, identify any outliers, and detect any potential correlations between variables.
+
+In the final step, I trained several classification models and analyzed their results to select the best one. For each model, I evaluated its performance on both the training and validation sets to detect any bias or variance issues. After comparing the results of all models, I chose the one that I believed had the best trade-off between bias and variance.d variance.
+
+In this notebook, I provide a step-by-step explanation of what I did in the project. However, in the project folder, I also wrote some test functions using Pytest. Since this is my first time writing tests, I believe it would be beneficial to add more functions to test different parts of the code.
+
+
+
+# Please read report.ipyn file or report.html
