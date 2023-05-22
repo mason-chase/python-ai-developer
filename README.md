@@ -1,82 +1,81 @@
 
-# Python Developer AI  Task
+# Customer Churn Project
 
-Build a binary classification model to predict whether a customer will churn (i.e., discontinue their subscription) or not based on various features in the dataset. You are given a dataset containing customer information and whether they churned or not in the past. Your task is to use this dataset to train a machine learning model and evaluate its performance on a test set.
+## Approach
 
-Dataset: You can use the Telco Customer Churn dataset, which is available on Kaggle at https://www.kaggle.com/blastchar/telco-customer-churn.
+The project aims to predict customer churn for a telecommunications company
+using machine learning. Customer churn is a critical issue for
+telecommunications companies, as it can lead to a loss of revenue and market
+share. Therefore, predicting customer churn can help companies take proactive
+measures to retain customers and improve their business performance.
+The project involves several steps, including data preprocessing, feature
+selection/engineering, model selection, hyperparameter tuning, and evaluation
+metrics.
 
-## Practices and patterns (Must):
+## Data Preprocessing
 
-- [TDD](https://en.wikipedia.org/wiki/Test-driven_development): A) Processes Data Clean Up B) Train C) Performance Test
-- [DDD](https://en.wikipedia.org/wiki/Domain-driven_design): Adjust Relevant Domain
-- Clean Architecture
-- Clean Code
-- Clean git commits that shows your work progress.
+The Telco Customer Churn dataset was loaded using pandas. The dataset
+contained 7043 rows and 21 columns. The data was preprocessed using the
+Preprocessing class in the preprocessing.py file. The preprocessing steps
+included dropping unnecessary columns, converting categorical variables to
+numerical variables using one-hot encoding, and scaling the data using
+StandardScaler. Data preprocessing is an essential step in machine learning, as
+it helps to clean and transform the data into a format that can be used by
+machine learning algorithms.
 
-## Deliverables:
+## Feature Selection/Engineering
 
-1. Python script that reads in the dataset, preprocesses it, trains a model, and evaluates its performance on a test set.
-2. A report explaining your approach, including details on data preprocessing, feature selection/engineering, choice of algorithm, hyperparameter tuning, and evaluation metrics.
-3. A visual representation of your model's performance (e.g., ROC curve, confusion matrix).
-4. Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com, make sure you do not erase my commits and then create a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) (code review).
+No feature selection or engineering was performed in this project. Feature
+selection and engineering are techniques used to select or create relevant
+features that can improve the performance of machine learning models.
+However, in some cases, the dataset may already contain relevant features, and
+feature selection/engineering may not be necessary.
 
-## Requirements:
+## Model Selection
 
-Use Python 3.x.
-1. Use scikit-learn for the machine learning tasks.
-2. Your code should be well-documented and follow best practices for software engineering.
-3. Your report should be clear and concise, with appropriate visualizations to support your claims.
-4. Your model should achieve an accuracy of at least 75% on the test set.
+The project used an EnsembleModel class in the model.py file to train an
+ensemble of three different machine learning models: RandomForestClassifier,
+GradientBoostingClassifier, and LogisticRegressionCV. The models were chosen
+based on their ability to handle classification tasks and their performance on
+similar datasets. Ensemble learning is a technique that combines multiple
+machine learning models to improve their performance and reduce overfitting.
 
+## Hyperparameter Tuning
 
-## Test Driven
+The hyperparameters for each model were tuned using GridSearchCV in the
+SingleModel class of the model.py file. The hyperparameters were chosen based
+on their ability to improve model performance and reduce overfitting.
+Hyperparameter tuning is an essential step in machine learning, as it helps to
+optimize the performance of machine learning models by selecting the best
+hyperparameters.
 
-Please improve below test model with clean architecture
+## Evaluation Metrics
 
-```python
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
-import unittest
+The performance of the models was evaluated using accuracy, confusion matrix,
+and ROC curve. The accuracy score was used to measure the overall
+performance of the models. The confusion matrix was used to measure the
+number of true positives, true negatives, false positives, and false negatives. The
+ROC curve was used to measure the trade-off between true positive rate and
+false positive rate. Evaluation metrics are essential in machine learning, as they
+help to measure the performance of machine learning models and compare them
+to other models.
 
-class TestModel(unittest.TestCase):
+## Test Results
 
-    def setUp(self):
-        # Load the data from a CSV file
-        self.data = pd.read_csv('data.csv')
-        
-        # Split the data into features and labels
-        self.X = self.data.drop('target', axis=1)
-        self.y = self.data['target']
-        
-        # Split the data into training and testing sets
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
-        
-        # Preprocess the data by scaling the features
-        self.scaler = StandardScaler()
-        self.X_train = self.scaler.fit_transform(self.X_train)
-        self.X_test = self.scaler.transform(self.X_test)
-        
-        # Train the logistic regression model
-        self.model = LogisticRegression()
-        self.model.fit(self.X_train, self.y_train)
-        
-        # Test the model on the test set
-        self.y_pred = self.model.predict(self.X_test)
-        
-    def test_accuracy(self):
-        # Assert
-        expected_accuracy = 0.9
-        actual_accuracy = accuracy_score(self.y_test, self.y_pred)
-        self.assertAlmostEqual(actual_accuracy, expected_accuracy, delta=0.05)
+The TestModel class in the test.py file was used to test the accuracy and
+functionality of the EnsembleModel class. The test_accuracy method tested the
+accuracy of the ensemble model, and the test_models_has_coefs method tested
+that the LogisticRegressionCV estimator had coefficients. Testing is an essential
+step in machine learning, as it helps to ensure that the models are working
+correctly and producing accurate results.
 
-    def test_model_has_coefs(self):
-        # Assert
-        self.assertIsNotNone(self.model.coef_)
+## Conclusion
 
-if __name__ == '__main__':
-    unittest.main()
-```
-
+The project successfully predicted customer churn for a telecommunications
+company using an ensemble of three different machine learning models. The
+models were trained using preprocessed data, and their hyperparameters were
+tuned using GridSearchCV. The performance of the models was evaluated using
+accuracy, confusion matrix, and ROC curve. The project demonstrated the
+importance of data preprocessing, model selection, hyperparameter tuning, and
+evaluation metrics in machine learning. By following these steps, machine
+learning models can be optimized to produce accurate and reliable results.
