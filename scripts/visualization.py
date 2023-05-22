@@ -2,9 +2,21 @@ from sklearn.metrics import confusion_matrix, roc_curve, auc
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def visualize_confusion_matrix(model_type, y_test, y_pred):
+    """Visualize the confusion matrix for a binary classification model.
+
+    Args:
+        model_type (str): The type of model being evaluated.
+        y_test (array-like): The true labels for the test set.
+        y_pred (array-like): The predicted labels for the test set.
+
+    Returns:
+        None
+
+    """
     # Calculate the confusion matrix
     cm = confusion_matrix(y_test, y_pred)
 
@@ -34,7 +46,17 @@ def visualize_confusion_matrix(model_type, y_test, y_pred):
 
 
 def visualize_roc(model_type, y_test, y_score):
+    """Visualize the ROC curve for a binary classification model.
 
+    Args:
+        model_type (str): The type of model being evaluated.
+        y_test (array-like): The true labels for the test set.
+        y_score (array-like): The predicted probabilities for the test set.
+
+    Returns:
+        None
+
+    """
     # Calculate the FPR, TPR, and classification thresholds using the roc_curve() function
     fpr, tpr, thresholds = roc_curve(y_test, y_score[:, 1])
 
