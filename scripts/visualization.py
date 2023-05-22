@@ -32,8 +32,6 @@ def visualize_confusion_matrix(model_type, y_test, y_pred):
     # Save the plot as an image file
     plt.savefig(f'../plots/{model_type}_cm.png')
 
-    # Show the plot
-    plt.show()
 
 def visualize_roc(model_type, y_test, y_score):
 
@@ -56,6 +54,3 @@ def visualize_roc(model_type, y_test, y_score):
 
     # Save the plot as an image file
     plt.savefig(f'../plots/{model_type}_roc.png')
-
-    # Show the plot
-    plt.show()

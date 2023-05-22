@@ -7,16 +7,19 @@ from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import VotingClassifier
 from preprocessing import Preprocessing
+from visualization import visualize_confusion_matrix, visualize_roc
 
 
 
 class SingleModel:
-	def __init__(self, model, params, data):
+	def __init__(self, model, model_type, params, data):
 		self.data = data
 		self.model = model
+		self.model_type
 		self.params = params
 		self.preprocess()
 		self.train()
+		self.visualize()
 
 	def preprocess(self):
 
@@ -34,6 +37,14 @@ class SingleModel:
 
 		self.best_model = grid_search.best_estimator_
 
+	def visualize(self):
+
+		y_pred = self.best_model.predict(self.X_test)
+		y_score = self.best_model.predict.proba(self.X_test)
+
+		visualize_confusion_matrix(model_type=self.model_type, self.y_test, y_pred)
+		visualize_roc(model_type=self.model_type, self.y_test, y_score)
+
 
 class EnsembleModel:
 	def __init__(self, models, data, voting='hard'):
@@ -42,6 +53,7 @@ class EnsembleModel:
 		self.voting = voting
 		self.preprocess()
 		self.train()
+		self.visualize()
 
 	def preprocess(self):
 
@@ -57,6 +69,13 @@ class EnsembleModel:
 		self.model = VotingClassifier(estimators=self.models, voting=self.voting)
 		self.model.fit(self.X_train, self.X_test)
 
+	def visualize(self):
+
+		y_pred = self.model.predict(self.X_test)
+		y_score = self.model.predict.proba(self.X_test)
+
+		visualize_confusion_matrix(model_type='Ensemble', self.y_test, y_pred)
+		visualize_roc(model_type='Ensemble', self.y_test, y_score)
 
 	
 		
