@@ -142,12 +142,14 @@ def plot_roc_curve(model, X_train, y_train, X_test, y_test, model_name):
     plt.savefig(os.path.join(roc_curve_folder, "roc_curve_{}.png".format(model_name.replace(" ", "_"))))
 
 
+
 def main():
+    if not os.path.exists(roc_curve_folder):
+        os.makedirs(roc_curve_folder)
     df_styled_best = find_best_models(X, Y, models)
-    # Display the styled DataFrame
-    display(df_styled_best)
-    plot_roc_curve(X_train, y_train, X_test, y_test)
+
+
 
 # Main
 if __name__ == "__main__":
-    main()
+    main() 
