@@ -96,16 +96,11 @@ def find_best_models(X, Y, models):
         R2_score_test = r2_score(y_test, model.predict(X_test))
         best_models_list.append([name, accuracy_test, R2_score_test])
 
-    df_best_models = pd.DataFrame(best_models_list, columns=['Model', 'Accuracy', 'R2_score'])
-
-    # Select the best model for each algorithm
-    df_best_model_per_algorithm = df_best_models.groupby('Model').apply(lambda x: x.loc[x['Accuracy'].idxmax()])
-
-    # Highlight the best model
-    df_styled_best = df_best_model_per_algorithm.style.highlight_max(subset=['Accuracy', 'R2_score'], color='green').highlight_min(subset=['Accuracy', 'R2_score'], color='red')
-
-    # Return the styled DataFrame
-    return df_styled_best
+    df_best_models = pd.DataFrame(best_models_list, columns=['Algorithm', 'Accuracy', 'F-Score'])
+    # Sort the DataFrame by accuracy in descending order
+    df_best_models = df_best_models.sort_values('Accuracy', ascending=False)
+    # Print the DataFrame to display the table
+    print(df_best_models)
 
 ##Roc_curve-function
 # split dataset to test and train
