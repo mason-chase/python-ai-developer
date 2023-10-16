@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
-
+import numpy as np
 def preprocess_dataset(dataset):
     # Encoding Binary categorical columns with LabelEncoder
     binary_cat_columns = ['gender', 'Partner', 'Dependents', 'PhoneService', 'PaperlessBilling', 'Churn']
