@@ -37,7 +37,7 @@ Y = Encodedata["Churn"].copy()
 
 # models
 models = [
-    ('Linear Classifier', SGDClassifier(loss='log',random_state=182)),
+    ('Linear Classifier', SGDClassifier(loss='log_loss',random_state=182)),
     ('Random Forest', RandomForestClassifier(random_state=1812)),
     ('Gradient Boost', GradientBoostingClassifier(n_estimators=100, learning_rate=0.01, max_depth=3, random_state=42)),
     ('XGBoost', XGBClassifier(random_state=1812)),
