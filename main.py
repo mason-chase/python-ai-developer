@@ -57,7 +57,7 @@ def find_best_models(X, Y, models):
         best_accuracy = 0  # Variable to track the best accuracy
         best_model = None  # Variable to store the best model
 
-        for _ in range(2):
+        for _ in range(10):
             model.fit(X_train, y_train)
             y_pred_val = model.predict(X_val)
             accuracy = model.score(X_val, y_val)
@@ -84,6 +84,9 @@ def find_best_models(X, Y, models):
         print(cm_test)
         print('----------------')
 
+    # Plot and save the ROC curve of the best model
+        if model == best_model:
+            plot_roc_curve(best_model, X_train, y_train, X_test, y_test, name)
     # Create a DataFrame with the best model results
     best_models_list = []
     for name, model in best_models.items():
