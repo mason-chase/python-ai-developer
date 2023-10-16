@@ -97,3 +97,33 @@ def find_best_models(X, Y, models):
 
     # Return the styled DataFrame
     return df_styled_best
+
+##Roc_curve-function
+# split dataset to test and train
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=1812)
+
+def plot_roc_curve(X_train, y_train, X_test, y_test):
+    # Train the logistic regression classifier
+    logreg = LogisticRegression(random_state=182)
+    logreg.fit(X_train, y_train)
+
+    # Obtain the predicted probabilities for the positive class
+    y_scores = logreg.predict_proba(X_test)[:, 1]
+
+    # Compute the false positive rate (FPR), true positive rate (TPR), and thresholds
+    fpr, tpr, thresholds = roc_curve(y_test, y_scores)
+
+    # Calculate the area under the ROC curve (AUC)
+    roc_auc = auc(fpr, tpr)
+
+    # Plot the ROC curve
+    plt.figure(figsize=(8, 6))
+    plt.plot(fpr, tpr, label='ROC curve (AUC = %0.2f)' % roc_auc, color='blue')
+    plt.plot([0, 1], [0, 1], 'k--', label='Random Guess', color='gray')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate (FPR)')
+    plt.ylabel('True Positive Rate (TPR)')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend(loc="lower right")
+    plt.show()
