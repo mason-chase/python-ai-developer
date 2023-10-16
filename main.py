@@ -17,6 +17,8 @@ from sklearn.metrics import roc_curve, auc
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
+from IPython.display import display
+import os 
 
 #read-data
 Dataset=pd.read_csv("./Dataset/WA_Fn-UseC_-Telco-Customer-Churn.csv")
@@ -109,13 +111,15 @@ def find_best_models(X, Y, models):
 # split dataset to test and train
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=1812)
 
-def plot_roc_curve(X_train, y_train, X_test, y_test):
-    # Train the logistic regression classifier
-    logreg = LogisticRegression(random_state=182)
-    logreg.fit(X_train, y_train)
+roc_curve_folder = "roc_curve_plots"
+
+def plot_roc_curve(model, X_train, y_train, X_test, y_test, model_name):
+    # Train the model
+    
+    model.fit(X_train, y_train)
 
     # Obtain the predicted probabilities for the positive class
-    y_scores = logreg.predict_proba(X_test)[:, 1]
+    y_scores = model.predict_proba(X_test)[:, 1]
 
     # Compute the false positive rate (FPR), true positive rate (TPR), and thresholds
     fpr, tpr, thresholds = roc_curve(y_test, y_scores)
@@ -131,9 +135,12 @@ def plot_roc_curve(X_train, y_train, X_test, y_test):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate (FPR)')
     plt.ylabel('True Positive Rate (TPR)')
-    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.title('Receiver Operating Characteristic (ROC) Curve - {}'.format(model_name))
     plt.legend(loc="lower right")
-    plt.show()
+    
+    # Save the ROC curve plot as an image file
+    plt.savefig(os.path.join(roc_curve_folder, "roc_curve_{}.png".format(model_name.replace(" ", "_"))))
+
 
 def main():
     df_styled_best = find_best_models(X, Y, models)
