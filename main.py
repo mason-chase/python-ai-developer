@@ -13,6 +13,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import r2_score
 import joblib
+from sklearn.metrics import roc_curve, auc
 
 #read-data
 Dataset=pd.read_csv("./Dataset/WA_Fn-UseC_-Telco-Customer-Churn.csv")
@@ -127,3 +128,13 @@ def plot_roc_curve(X_train, y_train, X_test, y_test):
     plt.title('Receiver Operating Characteristic (ROC) Curve')
     plt.legend(loc="lower right")
     plt.show()
+
+    def main():
+        df_styled_best = find_best_models(X, Y, models)
+        # Display the styled DataFrame
+        display(df_styled_best)
+        plot_roc_curve(X_train, y_train, X_test, y_test)
+
+# Main
+if __name__== "__main__":
+   main() 
