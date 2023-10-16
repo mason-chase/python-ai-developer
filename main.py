@@ -130,7 +130,7 @@ def plot_roc_curve(model, X_train, y_train, X_test, y_test, model_name):
     # Plot the ROC curve
     plt.figure(figsize=(8, 6))
     plt.plot(fpr, tpr, label='ROC curve (AUC = %0.2f)' % roc_auc, color='blue')
-    plt.plot([0, 1], [0, 1], 'k--', label='Random Guess', color='gray')
+    plt.plot([0, 1], [0, 1], 'k--', label='Random Guess')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate (FPR)')
