@@ -132,12 +132,12 @@ def plot_roc_curve(X_train, y_train, X_test, y_test):
     plt.legend(loc="lower right")
     plt.show()
 
-    def main():
-        df_styled_best = find_best_models(X, Y, models)
-        # Display the styled DataFrame
-        display(df_styled_best)
-        plot_roc_curve(X_train, y_train, X_test, y_test)
+def main():
+    df_styled_best = find_best_models(X, Y, models)
+    # Display the styled DataFrame
+    display(df_styled_best)
+    plot_roc_curve(X_train, y_train, X_test, y_test)
 
 # Main
-if __name__== "__main__":
-   main() 
+if __name__ == "__main__":
+    main()
