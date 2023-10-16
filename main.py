@@ -14,6 +14,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import r2_score
 import joblib
 from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
+import numpy as np
 
 #read-data
 Dataset=pd.read_csv("./Dataset/WA_Fn-UseC_-Telco-Customer-Churn.csv")
